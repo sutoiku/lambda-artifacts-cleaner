@@ -9,7 +9,7 @@ node('v2-slave'){
               deleteDir()
           }
 
-          git branch: env.BRANCH_NAME, credentialsId: 'stoicbot-github-ssh', url: "git@github.com:sutoiku/stoic-lambda-check-assemblage"
+          git branch: env.BRANCH_NAME, credentialsId: 'stoicbot-github-ssh', url: "git@github.com:sutoiku/lambda-artifacts-cleaner"
 
           stage name: 'Unit testing', concurrency: 1
             try{
