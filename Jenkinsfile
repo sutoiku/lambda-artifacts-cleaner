@@ -11,6 +11,8 @@ node('v2-slave'){
 
           git branch: env.BRANCH_NAME, credentialsId: 'stoicbot-github-ssh', url: "git@github.com:sutoiku/lambda-artifacts-cleaner"
 
+          stage name: 'Resolving dependencies', concurrency: 1
+              sh("npm i")
           stage name: 'Unit testing', concurrency: 1
             try{
                 sh("npm run stoic-unit-tests")
@@ -33,8 +35,6 @@ node('v2-slave'){
                      ])
             }
 
-          stage name: 'Resolving dependencies', concurrency: 1
-              sh("npm i")
 
           stage name: 'Deploying', concurrency: 1
               sh("node node_modules/grunt-cli/bin/grunt deploy")
